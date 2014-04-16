@@ -63,32 +63,6 @@
     NSLog(@"flipCount changed to %d", self.flipCount);
 }
     
-    
-/*
- This was solution I had. It was nicer because it hid the card. Solution above is from class
-     Card *card;
-    if ([sender.currentTitle length]) {
-        card = [self.deck drawRandomCard]; // draw next card if available
-        if (card){
-            [self.deck addCard:card]; // put card back if it was avaiable and show back
-            [sender setBackgroundImage:[UIImage imageNamed:@"cardback"]
-                              forState:UIControlStateNormal];
-            [sender setTitle:@"" forState:UIControlStateNormal];
-        }
-        else{
-             sender.hidden = YES; // if another card was not available hide card
-        }
-    } else {
-        card = [self.deck drawRandomCard];
-        if (card) {
-            [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
-                              forState:UIControlStateNormal];
-            [sender setTitle:card.contents forState:UIControlStateNormal];
-        }
-    }
-    self.flipCount++;
-     
-}
- */
+
 
 @end
