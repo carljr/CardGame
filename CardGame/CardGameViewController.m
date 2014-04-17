@@ -17,6 +17,10 @@
 @end
 
 @implementation CardGameViewController
+- (IBAction)resetGame:(UIButton *)sender {
+    self.game = nil;
+    [self updateUI];
+}
 
 -(CardMatchingGame *)game
 {
