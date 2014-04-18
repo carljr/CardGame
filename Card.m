@@ -8,19 +8,7 @@
 
 #import "Card.h"
 
-@interface Card()
-// use for private declarations
-
-
-
-
-@end
-
-
-
-
 @implementation Card
-
 
 - (int)match:(NSArray *)otherCards
 {

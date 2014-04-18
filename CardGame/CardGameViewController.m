@@ -24,13 +24,17 @@
 
 -(CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          usingDeck:[self createDeck]];
+    if (!_game) {
+        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                  usingDeck:[self createDeck]];
+        NSLog(@"New game was initialized");
+    }
     return _game;
 }
 
 - (Deck *)createDeck
 {
+    NSLog(@"Deck is created");
     return [[PlayingCardDeck alloc]init];
 }
 
@@ -38,12 +42,14 @@
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
+    NSLog(@"chosenButtonIndex is %d",chosenButtonIndex);// Index of card
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
 
 -(void)updateUI
 {
+    NSLog(@"updateUI starts");
     for (UIButton *cardButton in self.cardButtons) {
         int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
