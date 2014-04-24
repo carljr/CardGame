@@ -82,6 +82,15 @@ static const int COST_TO_CHOOSE = 1;
         } else {
             
             // If card was not already chosen then try to match.
+            
+            // will modify to add card to chosenNotMatchedCards array.
+            
+            int cardCount = [self.chosenNotMatchedCards count];
+            NSLog(@"cardCount before adding current card = %i", cardCount);
+            [self.chosenNotMatchedCards addObject:card]; // adding current card array
+            cardCount = [self.chosenNotMatchedCards count];
+            NSLog(@"cardCount after adding current card = %i", cardCount);
+            
             printf("\n");
             NSLog(@"Try to match the following");
             NSLog(@"card contents: %@ ischosen: %hhd  card isMatched: %hhd",
