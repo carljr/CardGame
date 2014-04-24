@@ -12,6 +12,7 @@
 
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; // of card
+@property (nonatomic, strong) NSMutableArray *chosenNotMatchedCards; //of card
 
 @end
 
