@@ -18,6 +18,12 @@
 
 @implementation CardMatchingGame
 
+-(NSMutableArray *)chosenNotMatchedCards
+{
+    if (!_chosenNotMatchedCards) _chosenNotMatchedCards = [[NSMutableArray alloc]init];
+    return _chosenNotMatchedCards;
+}
+
 -(NSMutableArray *)cards
 {
     if (!_cards) _cards= [[NSMutableArray alloc]init];
