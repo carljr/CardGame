@@ -56,8 +56,12 @@ static const int COST_TO_CHOOSE = 1;
 
 
 
-- (void)chooseCardAtIndex:(NSUInteger)index
+- (void)chooseCardAtIndex:(NSUInteger)index numberOfCardsToMatch:(int)numToMatch
 {
+    // print numToMatch
+    NSLog(@"numToMatch = %i", numToMatch);
+    
+    
     Card *card = [self cardAtIndex:index];
     NSLog(@"chooseCardAtIndex in CardMatchingGame.m");
     

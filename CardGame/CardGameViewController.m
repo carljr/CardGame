@@ -48,7 +48,7 @@
     
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     NSLog(@"chosenButtonIndex is %d",chosenButtonIndex);// Index of card
-    [self.game chooseCardAtIndex:chosenButtonIndex];
+    [self.game chooseCardAtIndex:chosenButtonIndex numberOfCardsToMatch: _numberOfCardsToMatch];
     [self updateUI];
 }
 
