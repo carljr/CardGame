@@ -168,9 +168,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vz2-q6-5vv">
-                                <rect key="frame" x="214" y="430" width="86" height="30"/>
+                                <rect key="frame" x="199" y="430" width="101" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Reset Game">
+                                <state key="normal" title="Re-Deal Cards">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -194,6 +194,7 @@
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="controller" destination="65A-j6-9qe" id="eCS-4X-FaP"/>
                         <outlet property="scoreLabel" destination="g37-FR-deV" id="ZIq-0B-sJI"/>
                         <outletCollection property="cardButtons" destination="gPE-xh-jY8" id="DCt-zg-5Fx"/>
                         <outletCollection property="cardButtons" destination="W84-0d-vwM" id="Z4Z-eM-x2K"/>
