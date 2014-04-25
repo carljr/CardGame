@@ -18,6 +18,16 @@
 @end
 
 @implementation CardGameViewController
+
+- (IBAction)controllerSelectionChange:(UISegmentedControl *)sender {
+    
+    if (sender.selectedSegmentIndex == 0) {
+        NSLog(@"Selected Match 2 Cards");
+    } else if (sender.selectedSegmentIndex == 1){
+        NSLog(@"Selected Match 3 Cards");
+    }
+}
+
 - (IBAction)resetGame:(UIButton *)sender {
     self.game = nil;
     [self updateUI];
