@@ -65,84 +65,91 @@ static const int COST_TO_CHOOSE = 1;
 
 - (void)chooseCardAtIndex:(NSUInteger)index numberOfCardsToMatch:(int)numToMatch
 {
-    // print numToMatch
+    
+    // Player has just selected a card. Receiving the card index and number of cards to match.
+    // print numToMatch - delete prior to go live
     NSLog(@"numToMatch = %i", numToMatch);
     
+    //clearing out existing chosenNotMatchedCards array
+    self.chosenNotMatchedCards = nil;
     
+    // setting card to the card the player selected.
     Card *card = [self cardAtIndex:index];
-    NSLog(@"chooseCardAtIndex in CardMatchingGame.m");
     
     if (!card.isMatched) {
         if (card.isChosen) {
             
-            // If card is chosen then clicking it unchoses it.
-            NSLog(@"Card %@ was Chosen - now setting to NO", card.contents);
-            
+            // If card is chosen then clicking it unchooses it.
+            // No score change for unclicking.
             card.chosen = NO;
+            
         } else {
             
             // If card was not already chosen then try to match.
+            // match against previously chosen cards
+            // for loop will iterate through all cards and find them.
             
-            // will modify to add card to chosenNotMatchedCards array.
-            
-            int cardCount = [self.chosenNotMatchedCards count];
-            NSLog(@"cardCount before adding current card = %i", cardCount);
-            [self.chosenNotMatchedCards addObject:card]; // adding current card array
-            cardCount = [self.chosenNotMatchedCards count];
-            NSLog(@"cardCount after adding current card = %i", cardCount);
-            
+            // display card we just picked
             printf("\n");
-            NSLog(@"Try to match the following");
-            NSLog(@"card contents: %@ ischosen: %hhd  card isMatched: %hhd",
-                  card.contents, card.isChosen, card.isMatched);
+            NSLog(@"Matching Card");
+            NSLog(@"card is %@", card.contents);
             
-            // match against other chosen cards
-            // for loop will iterate through all cards
-            
+            // iterate through all the card buttons
+            // if card is chosen and not mathced add to
+            // chosenNotMatchedCards array
             for (Card *otherCard in self.cards) {
                 
-                // Print the array of cards
+                // Print the array of all cards and status
                 NSLog(@"otherCard contents: %@ ischosen: %hhd  card isMatched: %hhd",
                       otherCard.contents, otherCard.isChosen, otherCard.isMatched);
                 
+                // find all cards that need to be matched
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     
-                    // Will only call match method when otherCard is chosen and not matched.
-                    // The card just picked is not "chosen" yet.
-                    // It is set to chosen later in this method.
-                    
-                    int matchScore = [card match:@[otherCard]];
-                    
-                    printf("\n");
-                    NSLog(@"Matching Cards");
-                    NSLog(@"card is %@", card.contents);
-                    NSLog(@"otherCard %@", otherCard.contents);
-                    
-                    if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
-                        otherCard.matched = YES;
-                        card.matched = YES;
-                    } else {
-                        self.score -= MISMATCH_PENALTY;
-                        otherCard.chosen = NO;
-                    }
-                    
-                    break; // can only choose 2 cards for now
-                    
+                    // adding current chosen not matched card to array
+                    [self.chosenNotMatchedCards addObject:otherCard];
                 }
             }
+            
+            if ([self.chosenNotMatchedCards count] < numToMatch-1){
+                // can add another card
+                NSLog(@"can add another card");
+                
+                // Calling match just to see if the we have a match between
+                // the last two cards. Will need info for display.
+                // chosenNotMatchedCards will have 0 or 1 card in it.
+                int matchScore = [card match:self.chosenNotMatchedCards];
+                
+            } else {
+                // ready to match
+                NSLog(@"ready to match");
+                int matchScore = [card match:self.chosenNotMatchedCards];
+                NSLog(@"matchScore = %i", matchScore);
+                
+                // If we have a match then update score
+                // and mark cards as matched
+                if (matchScore) {
+                    self.score += matchScore * MATCH_BONUS;
+                    card.matched = YES;
+                    for (Card *matchedCard in self.chosenNotMatchedCards){
+                        matchedCard.matched = YES;
+                    }
+
+                }
+            }
+            
             self.score -= COST_TO_CHOOSE;
             
-            // current card set to chosen in next line
-            
+            //set selected card to chosen
             card.chosen = YES;
-            
-            // Print the chosen card and it's properties
-            NSLog(@"Card %@ is set chosen. chosen: %hhd, matched: %hhd,", card.contents, card.chosen, card.matched);
-            for (Card *otherCard in self.cards) {
-                // Print the array of cards
-                NSLog(@"otherCard contents: %@ ischosen: %hhd  card isMatched: %hhd",
-                                otherCard.contents, otherCard.isChosen, otherCard.isMatched);
+
+            printf("\n");
+            NSLog(@"Current Card is %@", card.contents);
+            NSLog(@"Array of chosen cards");
+            for (Card *chosenCard in self.chosenNotMatchedCards) {
+                // Print the array of chosen cards
+                NSLog(@"chosen card array contents: %@ ischosen: %hhd  card isMatched: %hhd",
+                                chosenCard.contents, chosenCard.isChosen, chosenCard.isMatched);
             }
         }
     }
