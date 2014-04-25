@@ -19,12 +19,25 @@
 
 @implementation CardGameViewController
 
+- (int)numberOfCardsToMatch
+{
+    //set initial value to 2 to match button
+    if (_numberOfCardsToMatch == 0) {
+        _numberOfCardsToMatch = 2;
+    }
+    return _numberOfCardsToMatch;
+}
+
 - (IBAction)controllerSelectionChange:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 0) {
         NSLog(@"Selected Match 2 Cards");
+        NSLog(@"Previous value was %i", self.numberOfCardsToMatch);
+        self.numberOfCardsToMatch = 2;
     } else if (sender.selectedSegmentIndex == 1){
         NSLog(@"Selected Match 3 Cards");
+        NSLog(@"Previous value was %i", self.numberOfCardsToMatch);
+        self.numberOfCardsToMatch = 3;
     }
 }
 
@@ -53,7 +66,7 @@
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     //setting value to 3 for now - will set using button selection later;
-    [self setNumberOfCardsToMatch:3];
+    // [self setNumberOfCardsToMatch:3];
     NSLog(@"setNumberOfCardsToMatch = %i", self.numberOfCardsToMatch);
     
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
