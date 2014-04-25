@@ -57,7 +57,9 @@
     return (index<[self.cards count]) ? self.cards[index] : nil;
 }
 
-static const int MISMATCH_PENALTY = 2;
+// will not use MISMATCH_PENALTY const
+// instead set to MISMATCH_PENALTY to number of cards to choose
+// static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
 
@@ -118,7 +120,7 @@ static const int COST_TO_CHOOSE = 1;
                 // Calling match just to see if the we have a match between
                 // the last two cards. Will need info for display.
                 // chosenNotMatchedCards will have 0 or 1 card in it.
-                int matchScore = [card match:self.chosenNotMatchedCards];
+                //int matchScore = [card match:self.chosenNotMatchedCards];
                 
             } else {
                 // ready to match
@@ -134,10 +136,16 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *matchedCard in self.chosenNotMatchedCards){
                         matchedCard.matched = YES;
                     }
-
+                // otherwise set cards in chosenNotMatchedCards to not chosen
+                // and penalize for not having a match.
+                } else {
+                    for (Card *unChosenCard in self.chosenNotMatchedCards){
+                        [unChosenCard setChosen:NO];
+                    }
+                int MISMATCH_PENALTY = numToMatch;
+                self.score -= MISMATCH_PENALTY;
                 }
             }
-            
             self.score -= COST_TO_CHOOSE;
             
             //set selected card to chosen

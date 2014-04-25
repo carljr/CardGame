@@ -43,7 +43,7 @@
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     //setting value to 3 for now - will set using button selection later;
-    [self setNumberOfCardsToMatch:2];
+    [self setNumberOfCardsToMatch:3];
     NSLog(@"setNumberOfCardsToMatch = %i", self.numberOfCardsToMatch);
     
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];

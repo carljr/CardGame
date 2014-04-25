@@ -13,13 +13,34 @@
 -(int)match:(NSArray *)otherCards
 {
     int score = 0;
-    
+    /*
     if ([otherCards count] == 1) {
         PlayingCard *otherCard = [otherCards firstObject];
         if (otherCard.rank == self.rank) {
             score = 4;
         } else if ([otherCard.suit isEqualToString:self.suit]){
             score = 1;
+        }
+    }
+    */
+    // Compare last chasen card to array of cards
+    for (PlayingCard *otherCard in otherCards){
+        if (otherCard.rank == self.rank) {
+            score += 4;
+        } else if ([otherCard.suit isEqualToString:self.suit]) {
+            score += 1;
+        }
+    }
+    
+    // If array has more than 1 card compare the cards to each other.
+    // For now will only be able to handle two cards. i.e. "3" is selected.
+    if ([otherCards count] == 2){
+        PlayingCard *card0 = [otherCards objectAtIndexedSubscript:0];
+        PlayingCard *card1 = [otherCards objectAtIndexedSubscript:1];
+        if (card0.rank == card1.rank){
+            score += 4;
+        } else if (card0.suit == card1.suit){
+            score += 1;
         }
     }
     return score;
