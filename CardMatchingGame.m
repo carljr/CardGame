@@ -18,6 +18,15 @@
 
 @implementation CardMatchingGame
 
+- (int)numberOfCardsToMatch
+{
+    //set initial value to 2 to match button
+    if (_numberOfCardsToMatch == 0) {
+        _numberOfCardsToMatch = 2;
+    }
+    return _numberOfCardsToMatch;
+}
+
 -(NSMutableArray *)chosenNotMatchedCards
 {
     if (!_chosenNotMatchedCards) _chosenNotMatchedCards = [[NSMutableArray alloc]init];
@@ -65,12 +74,12 @@ static const int COST_TO_CHOOSE = 1;
 
 
 
-- (void)chooseCardAtIndex:(NSUInteger)index numberOfCardsToMatch:(int)numToMatch
+- (void)chooseCardAtIndex:(NSUInteger)index
 {
     
     // Player has just selected a card. Receiving the card index and number of cards to match.
     // print numToMatch - delete prior to go live
-    NSLog(@"numToMatch = %i", numToMatch);
+    NSLog(@"numToMatch = %i", self.numberOfCardsToMatch);
     
     //clearing out existing chosenNotMatchedCards array
     self.chosenNotMatchedCards = nil;
@@ -113,7 +122,7 @@ static const int COST_TO_CHOOSE = 1;
                 }
             }
             
-            if ([self.chosenNotMatchedCards count] < numToMatch-1){
+            if ([self.chosenNotMatchedCards count] < self.numberOfCardsToMatch-1){
                 // can add another card
                 NSLog(@"can add another card");
                 
@@ -142,7 +151,7 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *unChosenCard in self.chosenNotMatchedCards){
                         [unChosenCard setChosen:NO];
                     }
-                int MISMATCH_PENALTY = numToMatch;
+                int MISMATCH_PENALTY = self.numberOfCardsToMatch;
                 self.score -= MISMATCH_PENALTY;
                 }
             }

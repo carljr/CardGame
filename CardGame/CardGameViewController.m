@@ -15,31 +15,22 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *controller;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (nonatomic) int numberOfCardsToMatch;
+//@property (nonatomic) int numberOfCardsToMatch;
 
 @end
 
 @implementation CardGameViewController
 
-- (int)numberOfCardsToMatch
-{
-    //set initial value to 2 to match button
-    if (_numberOfCardsToMatch == 0) {
-        _numberOfCardsToMatch = 2;
-    }
-    return _numberOfCardsToMatch;
-}
-
 - (IBAction)controllerSelectionChange:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 0) {
         NSLog(@"Selected Match 2 Cards");
-        NSLog(@"Previous value was %i", self.numberOfCardsToMatch);
-        self.numberOfCardsToMatch = 2;
+        NSLog(@"Previous value was %i", self.game.numberOfCardsToMatch);
+        self.game.numberOfCardsToMatch = 2;
     } else if (sender.selectedSegmentIndex == 1){
         NSLog(@"Selected Match 3 Cards");
-        NSLog(@"Previous value was %i", self.numberOfCardsToMatch);
-        self.numberOfCardsToMatch = 3;
+        NSLog(@"Previous value was %i", self.game.numberOfCardsToMatch);
+        self.game.numberOfCardsToMatch = 3;
     }
 }
 
@@ -47,7 +38,7 @@
     self.game = nil;
     [self.controller setEnabled:YES forSegmentAtIndex:0];
     [self.controller setEnabled:YES forSegmentAtIndex:1];
-    [self.controller setSelectedSegmentIndex:self.numberOfCardsToMatch-2];
+    [self.controller setSelectedSegmentIndex:self.game.numberOfCardsToMatch-2];
     [self updateUI];
 }
 
@@ -74,11 +65,11 @@
     [self.controller setEnabled:NO forSegmentAtIndex:0];
     [self.controller setEnabled:NO forSegmentAtIndex:1];
     
-    NSLog(@"setNumberOfCardsToMatch = %i", self.numberOfCardsToMatch);
+    NSLog(@"setNumberOfCardsToMatch = %i", self.game.numberOfCardsToMatch);
     
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     NSLog(@"chosenButtonIndex is %d",chosenButtonIndex);// Index of card
-    [self.game chooseCardAtIndex:chosenButtonIndex numberOfCardsToMatch: _numberOfCardsToMatch];
+    [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
 
