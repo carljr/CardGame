@@ -15,8 +15,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *controller;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-//@property (nonatomic) int numberOfCardsToMatch;
-
+@property (strong, nonatomic) IBOutlet UILabel *gameStatusMessage;
 @end
 
 @implementation CardGameViewController
@@ -58,7 +57,6 @@
     return [[PlayingCardDeck alloc]init];
 }
 
-
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     //Disabling number of card selector once game starts
@@ -83,6 +81,7 @@
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        self.gameStatusMessage.text = self.game.gameStatus; // **** replace with currect status ****
     }
 }
 

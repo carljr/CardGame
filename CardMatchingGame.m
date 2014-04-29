@@ -93,6 +93,7 @@ static const int COST_TO_CHOOSE = 1;
             // If card is chosen then clicking it unchooses it.
             // No score change for unclicking.
             card.chosen = NO;
+            self.gameStatus = [NSString stringWithFormat:@"Card %@ deselected.",card.contents];
             
         } else {
             
@@ -130,6 +131,7 @@ static const int COST_TO_CHOOSE = 1;
                 // the last two cards. Will need info for display.
                 // chosenNotMatchedCards will have 0 or 1 card in it.
                 //int matchScore = [card match:self.chosenNotMatchedCards];
+                self.gameStatus = [NSString stringWithFormat:@"Card %@ selected.",card.contents];
                 
             } else {
                 // ready to match
@@ -145,6 +147,8 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *matchedCard in self.chosenNotMatchedCards){
                         matchedCard.matched = YES;
                     }
+                self.gameStatus = @"Match found";
+                    
                 // otherwise set cards in chosenNotMatchedCards to not chosen
                 // and penalize for not having a match.
                 } else {
@@ -153,6 +157,7 @@ static const int COST_TO_CHOOSE = 1;
                     }
                 int MISMATCH_PENALTY = self.numberOfCardsToMatch;
                 self.score -= MISMATCH_PENALTY;
+                self.gameStatus = [NSString stringWithFormat:@"No match, %i point penalty.", MISMATCH_PENALTY];
                 }
             }
             self.score -= COST_TO_CHOOSE;
