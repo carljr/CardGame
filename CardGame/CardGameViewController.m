@@ -7,7 +7,9 @@
 //
 
 #import "CardGameViewController.h"
-#import "PlayingCardDeck.h"
+
+// iport no longer needed since we are not creating playing card deck here
+// #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
@@ -53,8 +55,11 @@
 
 - (Deck *)createDeck
 {
-    NSLog(@"Deck is created");
-    return [[PlayingCardDeck alloc]init];
+    // removing code that creates paying card deck
+    // NSLog(@"Deck is created");
+    // return [[PlayingCardDeck alloc]init];
+    
+    return nil;
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender
