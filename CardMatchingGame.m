@@ -11,6 +11,7 @@
 @interface CardMatchingGame()
 
 @property (nonatomic, readwrite) NSInteger score;
+@property (nonatomic, readwrite) NSInteger newPoints; // making newPoints readwrite internally
 @property (nonatomic, strong) NSMutableArray *cards; // of card
 @property (nonatomic, strong) NSMutableArray *chosenNotMatchedCards; //of card
 
@@ -127,10 +128,6 @@ static const int COST_TO_CHOOSE = 1;
                 // can add another card
                 NSLog(@"can add another card");
                 
-                // Calling match just to see if the we have a match between
-                // the last two cards. Will need info for display.
-                // chosenNotMatchedCards will have 0 or 1 card in it.
-                //int matchScore = [card match:self.chosenNotMatchedCards];
                 self.gameStatus = [NSString stringWithFormat:@"Card %@ selected.",card.contents];
                 
             } else {
@@ -142,12 +139,13 @@ static const int COST_TO_CHOOSE = 1;
                 // If we have a match then update score
                 // and mark cards as matched
                 if (matchScore) {
+                    self.newPoints = matchScore * MATCH_BONUS; // getting new points for status message
                     self.score += matchScore * MATCH_BONUS;
                     card.matched = YES;
                     for (Card *matchedCard in self.chosenNotMatchedCards){
                         matchedCard.matched = YES;
                     }
-                self.gameStatus = @"Match found";
+                self.gameStatus = [NSString stringWithFormat:@"Match found for %ld points", (long)self.newPoints];
                     
                 // otherwise set cards in chosenNotMatchedCards to not chosen
                 // and penalize for not having a match.

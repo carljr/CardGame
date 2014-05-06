@@ -19,7 +19,8 @@
 -(void)chooseCardAtIndex:(NSUInteger)index;
 -(Card *)cardAtIndex:(NSUInteger)index;
 
-@property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, readonly) NSInteger score; // This is the over-all score
+@property (nonatomic, readonly) NSInteger newPoints; // Points from last match
 @property (nonatomic) int numberOfCardsToMatch;
 @property (nonatomic, strong) NSString* gameStatus;
 
