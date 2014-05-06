@@ -14,10 +14,12 @@
 @property (nonatomic, readwrite) NSInteger newPoints; // making newPoints readwrite internally
 @property (nonatomic, strong) NSMutableArray *cards; // of card
 @property (nonatomic, strong) NSMutableArray *chosenNotMatchedCards; //of card
+@property (nonatomic, strong) NSMutableArray *chosenNotMatchedCardsContents; // of NSString
 
 @end
 
 @implementation CardMatchingGame
+
 
 - (int)numberOfCardsToMatch
 {
@@ -32,6 +34,12 @@
 {
     if (!_chosenNotMatchedCards) _chosenNotMatchedCards = [[NSMutableArray alloc]init];
     return _chosenNotMatchedCards;
+}
+
+-(NSMutableArray *)chosenNotMatchedCardsContents
+{
+    if (!_chosenNotMatchedCardsContents) _chosenNotMatchedCardsContents = [[NSMutableArray alloc]init];
+    return _chosenNotMatchedCardsContents;
 }
 
 -(NSMutableArray *)cards
@@ -84,6 +92,7 @@ static const int COST_TO_CHOOSE = 1;
     
     //clearing out existing chosenNotMatchedCards array
     self.chosenNotMatchedCards = nil;
+    self.chosenNotMatchedCardsContents = nil;
     
     // setting card to the card the player selected.
     Card *card = [self cardAtIndex:index];
@@ -119,8 +128,11 @@ static const int COST_TO_CHOOSE = 1;
                 // find all cards that need to be matched
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     
-                    // adding current chosen not matched card to array
+                    // adding current chosen not matched card to array that will be send to match
                     [self.chosenNotMatchedCards addObject:otherCard];
+                    
+                    // adding contents of cards to array to display status
+                    [self.chosenNotMatchedCardsContents addObject:otherCard.contents];
                 }
             }
             
@@ -145,7 +157,9 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *matchedCard in self.chosenNotMatchedCards){
                         matchedCard.matched = YES;
                     }
-                self.gameStatus = [NSString stringWithFormat:@"Match found for %ld points", (long)self.newPoints];
+                self.gameStatus = [NSString stringWithFormat:@"%@ %@ match %ld points", card.contents,
+                                   [self.chosenNotMatchedCardsContents componentsJoinedByString:@" "],
+                                   (long)self.newPoints];
                     
                 // otherwise set cards in chosenNotMatchedCards to not chosen
                 // and penalize for not having a match.
