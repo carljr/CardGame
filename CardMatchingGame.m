@@ -169,7 +169,12 @@ static const int COST_TO_CHOOSE = 1;
                     }
                 int MISMATCH_PENALTY = self.numberOfCardsToMatch;
                 self.score -= MISMATCH_PENALTY;
-                self.gameStatus = [NSString stringWithFormat:@"No match, %i point penalty.", MISMATCH_PENALTY];
+                    self.gameStatus = [NSString stringWithFormat:@"%@ %@ don't match -%d points", card.contents,
+                                       [self.chosenNotMatchedCardsContents componentsJoinedByString:@" "],
+                                       MISMATCH_PENALTY];
+                    
+                    
+                    //[NSString stringWithFormat:@"No match, %i point penalty.", MISMATCH_PENALTY];
                 }
             }
             self.score -= COST_TO_CHOOSE;
