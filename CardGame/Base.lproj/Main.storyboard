@@ -282,10 +282,10 @@
             </objects>
             <point key="canvasLocation" x="407" y="-620"/>
         </scene>
-        <!--Playing Card Game View Controller - Set-->
+        <!--Set Card Game View Controller - Set-->
         <scene sceneID="0Yk-Td-IRs">
             <objects>
-                <viewController id="mM3-I7-esI" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
+                <viewController id="mM3-I7-esI" customClass="SetCardGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zay-0m-bKa"/>
                         <viewControllerLayoutGuide type="bottom" id="Ds6-Fr-Xjd"/>
