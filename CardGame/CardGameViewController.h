@@ -16,4 +16,13 @@
 // for sunclassers
 - (Deck *)createDeck; // Abstract
 
+// making titleForCard visible so I can update for SetCards
+-(NSString *)titleForCard:(Card *)card;
+
+// making backgroundImageForCard visible so I can update for SetCards
+-(UIImage *)backgroundImageForCard:(Card *)card;
+
+// will need to call updateUI also
+-(void)updateUI;
+
 @end
