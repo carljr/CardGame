@@ -17,7 +17,7 @@
 - (Deck *)createDeck; // Abstract
 
 // making titleForCard visible so I can update for SetCards
--(NSString *)titleForCard:(Card *)card;
+-(NSAttributedString *)titleForCard:(Card *)card;
 
 // making backgroundImageForCard visible so I can update for SetCards
 -(UIImage *)backgroundImageForCard:(Card *)card;

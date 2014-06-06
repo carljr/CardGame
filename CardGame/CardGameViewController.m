@@ -82,7 +82,8 @@
     for (UIButton *cardButton in self.cardButtons) {
         int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+        //updated setTitle method to setAttributedTitle
+        [cardButton setAttributedTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
@@ -90,9 +91,13 @@
     }
 }
 
--(NSString *)titleForCard:(Card *)card
+-(NSAttributedString *)titleForCard:(Card *)card
 {
-    return card.isChosen ? card.contents : @"";
+    // return card.isChosen ? card.contents : @"";
+    // instead of old return above will use the code commented above to create an
+    // attributed string instead.
+    NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString:card.isChosen ? card.contents : @""];
+    return attributedTitleForCard;
 }
 
 

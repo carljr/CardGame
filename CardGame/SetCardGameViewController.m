@@ -36,16 +36,30 @@
     //return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
 
--(NSString *)titleForCard:(Card *)card
+-(NSAttributedString *)titleForCard:(Card *)card
 {
     //Will need to set title for set cards - still using NSStrings for now
     
     SetCard *setCard = (SetCard *)card;
-    if ([setCard.symbol isEqualToString:@"diamond"]) return @"♦︎";
-    if ([setCard.symbol isEqualToString:@"squiggle"]) return @"◼︎";
-    if ([setCard.symbol isEqualToString:@"circle"]) return @"●";
 
-    return nil; // needed to avoid error for missing return.
+    if ([setCard.symbol isEqualToString:@"diamond"])
+    {
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"♦︎"];
+        return attributedTitleForCard;
+    }
+    if ([setCard.symbol isEqualToString:@"squiggle"])
+    {
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"◼︎"];
+        return attributedTitleForCard;
+    }
+    if ([setCard.symbol isEqualToString:@"circle"])
+    {
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"●"];
+        return attributedTitleForCard;
+    }
+
+    return nil;
 }
 
 @end
+
