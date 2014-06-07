@@ -38,23 +38,51 @@
 
 -(NSAttributedString *)titleForCard:(Card *)card
 {
-    //Will need to set title for set cards - still using NSStrings for now
-    
     SetCard *setCard = (SetCard *)card;
+    
+    //setting color
+    NSMutableDictionary *titleAttributes = [[NSMutableDictionary alloc]init];
+    if ([setCard.color  isEqual: @"red"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSForegroundColorAttributeName : [UIColor redColor]}];
+    }
+    
+    if ([setCard.color  isEqual: @"green"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSForegroundColorAttributeName : [UIColor greenColor]}];
+    }
+    
+    if ([setCard.color  isEqual: @"purple"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSForegroundColorAttributeName : [UIColor purpleColor]}];
+    }
+    
+    //setting fill
+    if ([setCard.shading  isEqual: @"solid"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSStrokeWidthAttributeName : @-5}];
+    }
+    // will use transperant color for striped. Read current forground color and use for outline then make transperant.
+    if ([setCard.shading  isEqual: @"striped"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSStrokeWidthAttributeName : @-5,
+                                                     NSStrokeColorAttributeName : titleAttributes[NSForegroundColorAttributeName],
+                                                     NSForegroundColorAttributeName : [titleAttributes[NSForegroundColorAttributeName] colorWithAlphaComponent:0.4]}];
+    }
+
+    if ([setCard.shading  isEqual: @"open"]) {
+        [titleAttributes addEntriesFromDictionary: @{NSStrokeWidthAttributeName : @5}];
+    }
+
 
     if ([setCard.symbol isEqualToString:@"diamond"])
     {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"♦︎"];
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"♦︎" attributes: titleAttributes];
         return attributedTitleForCard;
     }
     if ([setCard.symbol isEqualToString:@"squiggle"])
     {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"◼︎"];
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"◼︎" attributes: titleAttributes];
         return attributedTitleForCard;
     }
     if ([setCard.symbol isEqualToString:@"circle"])
     {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"●"];
+        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"●" attributes: titleAttributes];
         return attributedTitleForCard;
     }
 
