@@ -40,6 +40,27 @@
 {
     SetCard *setCard = (SetCard *)card;
     
+    //Setting symbol for Card
+    NSString *titleForCard;
+    
+    if ([setCard.symbol isEqualToString:@"diamond"])
+    {
+        titleForCard = @"♦︎";
+    }
+    if ([setCard.symbol isEqualToString:@"squiggle"])
+    {
+        titleForCard = @"◼︎";
+    }
+    if ([setCard.symbol isEqualToString:@"circle"])
+    {
+        titleForCard = @"●";
+    }
+    
+    //Setting symbol count based on number property
+    titleForCard = [titleForCard stringByPaddingToLength:setCard.number
+                                              withString:titleForCard
+                                         startingAtIndex:0];
+    
     //setting color
     NSMutableDictionary *titleAttributes = [[NSMutableDictionary alloc]init];
     if ([setCard.color  isEqual: @"red"]) {
@@ -69,24 +90,10 @@
         [titleAttributes addEntriesFromDictionary: @{NSStrokeWidthAttributeName : @5}];
     }
 
-
-    if ([setCard.symbol isEqualToString:@"diamond"])
-    {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"♦︎" attributes: titleAttributes];
-        return attributedTitleForCard;
-    }
-    if ([setCard.symbol isEqualToString:@"squiggle"])
-    {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"◼︎" attributes: titleAttributes];
-        return attributedTitleForCard;
-    }
-    if ([setCard.symbol isEqualToString:@"circle"])
-    {
-        NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: @"●" attributes: titleAttributes];
-        return attributedTitleForCard;
-    }
-
-    return nil;
+    // Put title together with attributes
+    NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: titleForCard attributes: titleAttributes];
+    
+    return attributedTitleForCard;
 }
 
 @end
