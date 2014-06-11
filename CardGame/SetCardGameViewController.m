@@ -41,7 +41,7 @@
     SetCard *setCard = (SetCard *)card;
     
     //Setting symbol for Card
-    NSString *titleForCard;
+    NSString *titleForCard = @"?";
     
     if ([setCard.symbol isEqualToString:@"diamond"])
     {
@@ -56,11 +56,12 @@
         titleForCard = @"●";
     }
     
-    //Setting symbol count based on number property
-    titleForCard = [titleForCard stringByPaddingToLength:setCard.number
-                                              withString:titleForCard
-                                         startingAtIndex:0];
-    
+    NSMutableString *numberedTitleForCard = [NSMutableString stringWithCapacity:3];
+    for (int i = 0; i < setCard.number; i++)
+    {
+        [numberedTitleForCard appendString:titleForCard];
+    }
+       
     //setting color
     NSMutableDictionary *titleAttributes = [[NSMutableDictionary alloc]init];
     if ([setCard.color  isEqual: @"red"]) {
@@ -91,7 +92,7 @@
     }
 
     // Put title together with attributes
-    NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString: titleForCard attributes: titleAttributes];
+    NSAttributedString *attributedTitleForCard = [[NSAttributedString alloc] initWithString:numberedTitleForCard attributes: titleAttributes];
     
     return attributedTitleForCard;
 }
