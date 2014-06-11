@@ -637,18 +637,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zZX-2q-sUe">
-                                <rect key="frame" x="57" y="360" width="207" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Match 2 Cards"/>
-                                    <segment title="Match 3 Cards"/>
-                                </segments>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="controllerSelectionChange:" destination="mM3-I7-esI" eventType="valueChanged" id="Vn1-Da-LAI"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-10-Wro">
                                 <rect key="frame" x="29" y="460" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -673,7 +661,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="Dza-2l-aef"/>
                     <connections>
-                        <outlet property="controller" destination="zZX-2q-sUe" id="XXm-Sf-Kn9"/>
                         <outlet property="gameStatusMessage" destination="SGK-10-Wro" id="aMg-hf-2L7"/>
                         <outlet property="scoreLabel" destination="XNj-9X-4mF" id="59S-cG-Riw"/>
                         <outletCollection property="cardButtons" destination="urk-37-wJy" id="nkm-cW-zIj"/>
