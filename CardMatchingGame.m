@@ -7,6 +7,7 @@
 //
 
 #import "CardMatchingGame.h"
+#import "SetCard.h"
 
 @interface CardMatchingGame()
 
@@ -96,6 +97,8 @@ static const int COST_TO_CHOOSE = 1;
     
     // setting card to the card the player selected.
     Card *card = [self cardAtIndex:index];
+    
+    if ([card isMemberOfClass:[SetCard class]]) self.numberOfCardsToMatch=3;
     
     if (!card.isMatched) {
         if (card.isChosen) {
