@@ -10,12 +10,62 @@
 
 @implementation SetCard
 
--(int)match:(NSArray *)otherCards {
+-(int)match:(NSArray *)otherCards
+{
     
     int score = 0;
-    //need to write match method.
-    return score;
+    BOOL posibleMatch = YES; // if greater than zero we do not have a match
     
+    // only works when 3 is selected
+    if ([otherCards count] == 2)
+    {
+        SetCard *card0 = [otherCards objectAtIndexedSubscript:0];
+        SetCard *card1 = [otherCards objectAtIndexedSubscript:1];
+        
+        //Matching symbols
+        if ((card0.symbol == card1.symbol) && (self.symbol == card0.symbol))
+        {
+            posibleMatch = YES && posibleMatch;
+        } else if ((card0.symbol != card1.symbol) && (card0.symbol != self.symbol) && (card1.symbol != self.symbol))
+        {
+            posibleMatch = YES & posibleMatch;
+        } else
+            posibleMatch = NO;
+        
+        //Matching shading
+        if ((card0.shading == card1.shading) && (self.shading == card0.shading))
+        {
+            posibleMatch = YES && posibleMatch;
+        } else if ((card0.shading != card1.shading) && (card0.shading != self.shading) && (card1.shading != self.shading))
+        {
+            posibleMatch = YES & posibleMatch;
+        } else
+            posibleMatch = NO;
+        
+        //Matching color
+        if ((card0.color == card1.color) && (self.color == card0.color))
+        {
+            posibleMatch = YES && posibleMatch;
+        } else if ((card0.color != card1.color) && (card0.color != self.color) && (card1.color != self.color))
+        {
+            posibleMatch = YES & posibleMatch;
+        } else
+            posibleMatch = NO;
+        
+        //Matching number
+        if ((card0.number == card1.number) && (self.number == card0.number))
+        {
+            posibleMatch = YES && posibleMatch;
+        } else if ((card0.number != card1.number) && (card0.number != self.number) && (card1.number != self.number))
+        {
+            posibleMatch = YES & posibleMatch;
+        } else
+            posibleMatch = NO;
+    }
+    
+    if (posibleMatch) score +=4;
+    
+    return score;
 }
 
 -(NSString *)contents {

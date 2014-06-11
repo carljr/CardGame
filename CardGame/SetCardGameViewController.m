@@ -56,6 +56,7 @@
         titleForCard = @"●";
     }
     
+    //Setting the number of symbols for the title
     NSMutableString *numberedTitleForCard = [NSMutableString stringWithCapacity:3];
     for (int i = 0; i < setCard.number; i++)
     {
