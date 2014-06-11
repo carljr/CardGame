@@ -21,6 +21,11 @@
 
 @implementation CardMatchingGame
 
+-(NSMutableArray *)history
+{
+    if (!_history) _history = [[NSMutableArray alloc]init];
+    return _history;
+}
 
 - (int)numberOfCardsToMatch
 {
@@ -107,6 +112,12 @@ static const int COST_TO_CHOOSE = 1;
             // No score change for unclicking.
             card.chosen = NO;
             self.gameStatus = [NSString stringWithFormat:@"Card %@ deselected.",card.contents];
+            [self.history addObject:self.gameStatus];
+            for (NSString *loggedHistory in self.history) {
+                // Print the array of chosen cards
+                NSLog(@"History: %@",
+                      loggedHistory);
+            }
             
         } else {
             
@@ -144,6 +155,12 @@ static const int COST_TO_CHOOSE = 1;
                 NSLog(@"can add another card");
                 
                 self.gameStatus = [NSString stringWithFormat:@"Card %@ selected.",card.contents];
+                [self.history addObject:self.gameStatus];
+                for (NSString *loggedHistory in self.history) {
+                    // Print the array of chosen cards
+                    NSLog(@"History: %@",
+                          loggedHistory);
+                }
                 
             } else {
                 // ready to match
@@ -160,9 +177,15 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *matchedCard in self.chosenNotMatchedCards){
                         matchedCard.matched = YES;
                     }
-                self.gameStatus = [NSString stringWithFormat:@"%@ %@ match %ld points", card.contents,
+                self.gameStatus = [NSString stringWithFormat:@"%@ %@ matched for %ld points", card.contents,
                                    [self.chosenNotMatchedCardsContents componentsJoinedByString:@" "],
                                    (long)self.newPoints];
+                    [self.history addObject:self.gameStatus];
+                    for (NSString *loggedHistory in self.history) {
+                        // Print the array of chosen cards
+                        NSLog(@"History: %@",
+                              loggedHistory);
+                    }
                     
                 // otherwise set cards in chosenNotMatchedCards to not chosen
                 // and penalize for not having a match.
@@ -175,6 +198,14 @@ static const int COST_TO_CHOOSE = 1;
                     self.gameStatus = [NSString stringWithFormat:@"%@ %@ don't match -%d points", card.contents,
                                        [self.chosenNotMatchedCardsContents componentsJoinedByString:@" "],
                                        MISMATCH_PENALTY];
+                    [self.history addObject:self.gameStatus];
+                    // Print history
+                    for (NSString *loggedHistory in self.history) {
+                        // Print the array of chosen cards
+                        NSLog(@"History: %@",
+                              loggedHistory);
+                    }
+                    
                     
                     
                     //[NSString stringWithFormat:@"No match, %i point penalty.", MISMATCH_PENALTY];

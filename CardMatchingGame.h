@@ -23,5 +23,6 @@
 @property (nonatomic, readonly) NSInteger newPoints; // Points from last match
 @property (nonatomic) int numberOfCardsToMatch;
 @property (nonatomic, strong) NSString* gameStatus;
+@property (nonatomic, strong) NSMutableArray *history;
 
 @end
