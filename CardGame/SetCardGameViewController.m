@@ -32,7 +32,7 @@
 -(UIImage *)backgroundImageForCard:(Card *)card
 {
     // for now making card always show card front as a test since it is white
-    return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardfront"];
+    return [UIImage imageNamed:card.isChosen ? @"SelectedSetCard" : @"cardfront"];
     //return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
 
