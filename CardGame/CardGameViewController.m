@@ -98,13 +98,18 @@
     }
     //added if statement because set game starts with no message but updateUI runs ti get card faces
     if (!(self.game.gameStatus == nil)){
-        [self.gameHistory addObject:self.game.gameStatus];
-        for (NSString *loggedHistory in self.gameHistory)
-        {
-            // Print the array of chosen cards
-            NSLog(@"Game History: %@",
-                  loggedHistory);
-        }
+        
+        // removing code below. Instead changed gameHistory to NSArray
+        // from NSMutable array and copied data from history array in model.
+        //[self.gameHistory addObject:self.game.gameStatus];
+        //for (NSString *loggedHistory in self.gameHistory)
+        //{
+        //    // Print the array of chosen cards
+        //    NSLog(@"Game History: %@",
+        //          loggedHistory);
+        //}
+        
+        self.gameHistory = [[NSMutableArray alloc] initWithArray:self.game.history];
     }
 }
 
