@@ -25,6 +25,8 @@
 // will need to call updateUI also
 -(void)updateUI;
 
+-(void)updateGameStatus;
+
 @property (nonatomic, strong) NSMutableArray *gameHistory;
 
 @end

@@ -96,22 +96,17 @@
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
         self.gameStatusMessage.text = self.game.gameStatus; // **** replace with currect status ****
     }
+    [self updateGameStatus];
+}
+
+-(void)updateGameStatus
+{
     //added if statement because set game starts with no message but updateUI runs ti get card faces
     if (!(self.game.gameStatus == nil)){
-        
-        // removing code below. Instead changed gameHistory to NSArray
-        // from NSMutable array and copied data from history array in model.
-        //[self.gameHistory addObject:self.game.gameStatus];
-        //for (NSString *loggedHistory in self.gameHistory)
-        //{
-        //    // Print the array of chosen cards
-        //    NSLog(@"Game History: %@",
-        //          loggedHistory);
-        //}
-        
         self.gameHistory = [[NSMutableArray alloc] initWithArray:self.game.history];
     }
 }
+
 
 -(NSAttributedString *)titleForCard:(Card *)card
 {
