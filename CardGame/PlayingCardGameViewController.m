@@ -8,12 +8,24 @@
 
 #import "PlayingCardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "HistoryViewController.h"
+#import "CardMatchingGame.h"
 
 @interface PlayingCardGameViewController ()
 
 @end
 
 @implementation PlayingCardGameViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
+            [segue.destinationViewController setHistory:self.gameHistory];
+        }
+    }
+}
 
 - (Deck *) createDeck
 {

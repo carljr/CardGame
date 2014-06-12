@@ -10,12 +10,24 @@
 #import "SetCardDeck.h"
 #import "SetCard.h"
 #import "CardMatchingGame.h"
+#import "HistoryViewController.h"
+
 
 @interface SetCardGameViewController ()
 
 @end
 
 @implementation SetCardGameViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
+            [segue.destinationViewController setHistory:self.gameHistory];
+        }
+    }
+}
 
 - (void)viewDidLoad
 {
