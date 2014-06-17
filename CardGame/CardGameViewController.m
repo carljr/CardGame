@@ -10,10 +10,10 @@
 
 // iport no longer needed since we are not creating playing card deck here
 // #import "PlayingCardDeck.h"
-#import "CardMatchingGame.h"
+
 
 @interface CardGameViewController ()
-@property (strong, nonatomic) CardMatchingGame *game;
+
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *controller;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;

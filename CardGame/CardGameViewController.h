@@ -10,8 +10,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Deck.h"
+#import "CardMatchingGame.h"
 
 @interface CardGameViewController : UIViewController
+
+@property (strong, nonatomic) CardMatchingGame *game;
 
 // for sunclassers
 - (Deck *)createDeck; // Abstract
