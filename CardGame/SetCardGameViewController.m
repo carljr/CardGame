@@ -24,7 +24,7 @@
 {
     if ([segue.identifier isEqualToString:@"ShowHistory"]) {
         if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
-            [segue.destinationViewController setHistory:self.gameHistory];
+            [segue.destinationViewController setHistory:self.game.history];
         }
     }
 }
