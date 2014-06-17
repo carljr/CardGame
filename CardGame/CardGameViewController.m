@@ -22,13 +22,6 @@
 
 @implementation CardGameViewController
 
-
--(NSMutableArray *)gameHistory
-{
-    if (!_gameHistory) _gameHistory = [[NSMutableArray alloc]init];
-    return _gameHistory;
-}
-
 - (IBAction)controllerSelectionChange:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 0) {
@@ -96,17 +89,7 @@
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
         self.gameStatusMessage.text = self.game.gameStatus; // **** replace with currect status ****
     }
-    [self updateGameStatus];
 }
-
--(void)updateGameStatus
-{
-    //added if statement because set game starts with no message but updateUI runs ti get card faces
-    if (!(self.game.gameStatus == nil)){
-        self.gameHistory = [[NSMutableArray alloc] initWithArray:self.game.history];
-    }
-}
-
 
 -(NSAttributedString *)titleForCard:(Card *)card
 {
